@@ -12,7 +12,7 @@ private:
     char trainTime[10];
     bool active;                 // counts only real records
 
-    // safe copy into fixed-size char buffers
+   
     static void copyText(char *dest, const char *src, size_t cap) {
         if (!src) { dest[0] = '\0'; return; }
         strncpy(dest, src, cap - 1);
@@ -27,7 +27,7 @@ public:
         trainName[0] = source[0] = destination[0] = trainTime[0] = '\0';
     }
 
-    // param: make an active record
+     //an active record
     Train(int number, const char* name, const char* src, const char* dest, const char* time)
         : trainNumber(number), active(true) {
         copyText(trainName, name, sizeof(trainName));
@@ -71,7 +71,7 @@ public:
     const char* getTrainTime() const { return trainTime; }
     static int getTrainCount() { return trainCount; }
 
-    // quick batch setter (keeps count correct)
+    
     void setAll(int number, const char* name, const char* src, const char* dest, const char* time) {
         bool wasActive = active;
         if (!active) { active = true; trainCount++; }
@@ -167,7 +167,6 @@ public:
     }
 
 private:
-    // helper to seed initial data without double-counting
     void addPreset(int number, const char* name, const char* src, const char* dest, const char* time) {
         trains[totalTrains].setAll(number, name, src, dest, time);
         totalTrains++;
